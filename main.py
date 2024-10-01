@@ -1,5 +1,8 @@
 import streamlit as st
 from scrape import scrape_website, extract_body_content, clean_body_content, split_dom_content
+from parse import parse_with_ollama
+
+# parse button is showing to early
 
 st.title("AI web scraper")
 
@@ -25,4 +28,6 @@ if st.button("Parse Content"):
         st.write("Parsing the content")
 
         dom_chunks = split_dom_content(st.session_state.dom_content)
+        result = parse_with_ollama(dom_chunks, parse_description)
+        st.write(result)
     
